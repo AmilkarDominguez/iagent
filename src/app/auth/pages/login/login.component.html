@@ -1,0 +1,36 @@
+<p-toast></p-toast>
+<p-card [style]="{'width': '50rem', 'margin': '2em'}">
+    <div class="text-center">
+
+        <img src="./assets/logo_iagent.svg" width="30%" alt="">
+    </div>
+
+
+    <form autocomplete="off" [formGroup]="loginForm" (ngSubmit)="login()">
+
+        <div class="p-grid p-fluid mx-4">
+
+            <div class="col-12">
+                <div class="my-2"><i class="pi pi-user mr-2"></i>Correo</div>
+                <input type="text" pInputText placeholder="Correo" formControlName="email">
+            </div>
+            <div class="col-12">
+                <div class="my-2"><i class="pi pi-key mr-2"></i>Contraseña</div>
+                <!-- <input type="password" pInputText placeholder="Contraseña" formControlName="password"> -->
+                <p-password formControlName="password" [toggleMask]="true" [feedback]="false" placeholder="Contraseña"
+                    promptLabel="Ingrese su contraseña" weakLabel="Seguridad baja" mediumLabel="Seguridad media"
+                    strongLabel="Seguridad alta"></p-password>
+            </div>
+            <div class="col-12 mt-4">
+                <button pButton type="submit" [disabled]="loginForm.invalid" label="Ingresar" class="bg-primary p-button-rounded text-white"></button>
+            </div>
+            <div class="col-12 mt-2">
+                <div class="text-center mb-2">
+                    ¿No tienes cuenta?
+                </div>
+                <a pButton type="button" label="CREAR CUENTA AQUÍ" (click)="goRegister()"
+                    class=" p-button-link p-button-sm text-primary"></a>
+            </div>
+        </div>
+    </form>
+</p-card>

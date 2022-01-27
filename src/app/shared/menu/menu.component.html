@@ -1,0 +1,38 @@
+<p-menubar class="menu">
+    <ng-template pTemplate="start">
+        <p-avatar image="./assets/icons/logo.svg" shape="circle"></p-avatar>
+    </ng-template>
+    <ng-template pTemplate="end">
+
+        <!-- <p-slideMenu #menu [model]="items" [popup]="true"></p-slideMenu>
+        <button #btn type="button" pButton icon="pi pi-user" [label]="email" class="p-button-outlined" (click)="menu.toggle($event)"></button> -->
+
+        <!-- <p-menubar [model]="items"></p-menubar> -->
+        <button #btn type="button" pButton icon="pi pi-user" [label]="email" class="p-button-outlined p-button-secondary" (click)="menu.toggle($event)"></button>
+        <p-tieredMenu #menu [model]="items" [popup]="true"></p-tieredMenu>
+        <!-- Hola, {{email}}
+        <p-avatar shape="circle" icon="pi pi-user" class="ml-3"></p-avatar> -->
+    </ng-template>
+</p-menubar>
+
+
+<!-- <p-toolbar>
+    <div class="p-toolbar-group-left">
+        <p-button type="button" styleClass="p-button-danger p-button-outlined" (click)="visibleSidebar = true"
+            icon="pi pi-bars"></p-button>
+    </div>
+</p-toolbar>
+<p-sidebar [(visible)]="visibleSidebar" [baseZIndex]="10000">
+    <h1 style="font-weight:normal">Menú</h1>
+    <div>
+        <p-button type="button" (click)="visibleSidebar = false" label="Cerrar" styleClass="p-button-success">
+        </p-button>
+    </div>
+    <p-divider></p-divider>
+    <div>
+        <p-button type="button" (click)="logout()" icon="pi pi-sign-out" iconPos="right" label="Cerrar sesión"
+            styleClass="p-button-danger">
+        </p-button>
+    </div>
+    <p-divider></p-divider>
+</p-sidebar> -->

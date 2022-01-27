@@ -1,0 +1,1529 @@
+<!-- header -->
+<p-toolbar>
+    <div class="p-toolbar-group-left">
+        <p-button type="button" styleClass="p-button-danger p-button-outlined" (click)="visibleSidebar = true"
+            icon="pi pi-bars"></p-button>
+        <div class="ml-4 cursor-pointer" [routerLink]="['/home']">
+            <i class="pi pi-arrow-left text-primary"></i>
+        </div>
+        <h3 class="ml-2">Crear requerimiento</h3>
+    </div>
+    <div class="p-toolbar-group-right">
+        <p-button icon="pi pi-times" styleClass="p-button-danger p-button-outlined p-button-rounded"
+            [routerLink]="['/home']"></p-button>
+    </div>
+</p-toolbar>
+<p-sidebar [(visible)]="visibleSidebar" [baseZIndex]="10000">
+    <h3 style="font-weight:normal">Menú</h3>
+    <app-opsidebar></app-opsidebar>
+</p-sidebar>
+<!-- end header -->
+<p-toast></p-toast>
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" [dismissableMask]="true">
+    <ng-template pTemplate="header">
+        <div class="grid w-full">
+            <div class="col-12 text-center">
+                <h1>REGISTRO EXITOSO!</h1>
+                <p>En breve te llegarán los leads</p>
+                <svg width="203" height="203" viewBox="0 0 203 203" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g filter="url(#filter0_d_659_1237)">
+                        <circle cx="101.5" cy="95.5" r="75.5" fill="#FEFFFF" />
+                        <path d="M134.746 71.9062L87.5582 119.094L66.1094 97.6449" stroke="#FF666C"
+                            stroke-width="6.38889" stroke-linecap="round" stroke-linejoin="round" />
+                    </g>
+                    <defs>
+                        <filter id="filter0_d_659_1237" x="0.444447" y="0.833335" width="202.111" height="202.111"
+                            filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                            <feColorMatrix in="SourceAlpha" type="matrix"
+                                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                            <feOffset dy="6.38889" />
+                            <feGaussianBlur stdDeviation="12.7778" />
+                            <feComposite in2="hardAlpha" operator="out" />
+                            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0" />
+                            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_659_1237" />
+                            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_659_1237"
+                                result="shape" />
+                        </filter>
+                    </defs>
+                </svg>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton label="ACEPTAR" (click)="goLeadsPage()" class="p-button-rounded w-full"></button>
+    </ng-template>
+</p-confirmDialog>
+
+
+<form autocomplete="off" [formGroup]="propetyForm" (ngSubmit)="register()">
+
+
+    <div [ngSwitch]="pageActive">
+        <!-- PropetyTypePage -->
+        <div *ngSwitchCase="PageNames.PropetyTypePage">
+            <div class="mt-6">
+                <div class="grid">
+                    <div class="col"></div>
+                    <div class="col-12 sm:col-10 md:col-8 lg:col-4  text-center border-round bg-white">
+                        <div class="grid  border-round surface-200 shadow-2">
+                            <div class="col-12 ">
+                                <div class="text-center">
+                                    <h2 class="mb-0">Empecemos!</h2>
+                                    <p>Elige el tipo de inmueble</p>
+                                </div>
+
+                                <div class="grid mt-4 mb-6">
+
+                                    <div class="col-4 col-offset-1">
+                                        <div class="bg-white border-round shadow-2 cursor-pointer"
+                                            [ngClass]="[departmentCardStyle]" (click)="selectCardPropety(0)">
+                                            <div class="card mx-4">
+                                                <div class="flex">
+                                                    <img src="./assets/icons/property_location.svg" alt="img">
+                                                    <h4 class="ml-2">Departamento</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 col-offset-2">
+                                        <div class="bg-white border-round shadow-2 cursor-pointer"
+                                            [ngClass]="[houseCardStyle]" (click)="selectCardPropety(1)">
+                                            <div class="card mx-4">
+                                                <div class="flex">
+                                                    <img src="./assets/icons/house.svg" alt="img">
+                                                    <h4 class="ml-2">Casa</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-4 col-offset-1">
+                                        <div class="bg-white border-round shadow-2 cursor-pointer"
+                                            [ngClass]="[officeCardStyle]" (click)="selectCardPropety(2)">
+                                            <div class="card mx-4">
+                                                <div class="flex">
+                                                    <img src="./assets/icons/office.svg" alt="img">
+                                                    <h4 class="ml-2">Oficina</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 col-offset-2">
+                                        <div class="bg-white border-round shadow-2 cursor-pointer"
+                                            [ngClass]="[terraintCardStyle]" (click)="selectCardPropety(3)">
+                                            <div class="card mx-4">
+                                                <div class="flex">
+                                                    <img src="./assets/icons/terrain.svg" alt="img">
+                                                    <h4 class="ml-2">Terreno</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-4 col-offset-1">
+                                        <div class="bg-white border-round shadow-2 cursor-pointer"
+                                            [ngClass]="[barnCardStyle]" (click)="selectCardPropety(4)">
+                                            <div class="card mx-4">
+                                                <div class="flex">
+                                                    <img src="./assets/icons/shed.svg" alt="img">
+                                                    <h4 class="ml-2">Galpón</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 col-offset-2">
+                                        <div class="bg-white border-round shadow-2 cursor-pointer"
+                                            [ngClass]="[comercialCardStyle]" (click)="selectCardPropety(5)">
+                                            <div class="card mx-4">
+                                                <div class="flex">
+                                                    <img src="./assets/icons/store.svg" alt="img">
+                                                    <h5 class="ml-2">Local comercial</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-4 col-offset-1">
+                                        <div class="bg-white border-round shadow-2 cursor-pointer"
+                                            [ngClass]="[buildCardStyle]" (click)="selectCardPropety(6)">
+                                            <div class="card mx-4">
+                                                <div class="flex">
+                                                    <img src="./assets/icons/build.svg" alt="img">
+                                                    <h4 class="ml-2">Edificio</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="grid  bg-white border-round-bottom shadow-2">
+                            <div class="col-12 p-0 m-0">
+                                <p-progressBar [value]="progressBarValue" [style]="{'height': '6px'}"
+                                    [showValue]="false">
+                                </p-progressBar>
+                            </div>
+                            <div class="col-12 my-4">
+                                <div class="grid">
+                                    <div class="col-5 col-offset-7 ">
+                                        <p-button label="SIGUIENTE"
+                                            styleClass="p-button-danger p-button-rounded p-button-sm p-button-block"
+                                            [style]="{width: '75%'}" [disabled]="btnNextPropetyTypePage"
+                                            (click)="nextPropetyTypePage()">
+                                        </p-button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col"></div>
+                </div>
+            </div>
+        </div>
+        <!-- End PropetyTypePage -->
+        <!-- OfferTypePage -->
+        <div *ngSwitchCase="PageNames.OfferTypePage">
+            <div class="mt-6">
+                <div class="grid">
+                    <div class="col"></div>
+                    <div class="col-12 sm:col-10 md:col-8 lg:col-4  text-center border-round bg-white">
+                        <div class="grid  border-round surface-200 shadow-2">
+                            <div class="col-12 ">
+                                <div class="text-center">
+                                    <h2 class="mb-0">Tipo de oferta</h2>
+                                    <p>Elige el tipo de oferta</p>
+                                </div>
+
+                                <div class="grid mt-4">
+                                    <div class="col-6 col-offset-3">
+                                        <div class="bg-white border-round shadow-2 cursor-pointer"
+                                            [ngClass]="[rentCardStyle]" (click)="selectCardOffer(0)">
+                                            <div class="card mx-4">
+                                                <div class="flex flex-row flex-wrap card-container">
+                                                    <div class="flex align-items-center justify-content-center m-2">
+                                                        <img src="./assets/icons/rent.svg" alt="img">
+                                                    </div>
+                                                    <div class="flex align-items-center justify-content-center m-2">
+                                                        <h4>Alquiler</h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="grid mt-2">
+                                    <div class="col-6 col-offset-3">
+                                        <div class="bg-white border-round shadow-2 cursor-pointer"
+                                            [ngClass]="[saleCardStyle]" (click)="selectCardOffer(1)">
+                                            <div class="card mx-4">
+                                                <div class="flex flex-row flex-wrap card-container">
+                                                    <div class="flex align-items-center justify-content-center m-2">
+                                                        <img src="./assets/icons/sale.svg" alt="img">
+                                                    </div>
+                                                    <div class="flex align-items-center justify-content-center m-2">
+                                                        <h4>Venta</h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="grid mt-2 mb-6">
+                                    <div class="col-6 col-offset-3">
+                                        <div class="bg-white border-round shadow-2 cursor-pointer"
+                                            [ngClass]="[antiqueCardStyle]" (click)="selectCardOffer(2)">
+                                            <div class="card mx-4">
+                                                <div class="flex flex-row flex-wrap card-container">
+                                                    <div class="flex align-items-center justify-content-center m-2">
+                                                        <img src="./assets/icons/antique.svg" alt="img">
+                                                    </div>
+                                                    <div class="flex align-items-center justify-content-center m-2">
+                                                        <h4>Anticrético</h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid  bg-white border-round-bottom shadow-2">
+                            <div class="col-12 p-0 m-0">
+                                <p-progressBar [value]="progressBarValue" [style]="{'height': '6px'}"
+                                    [showValue]="false">
+                                </p-progressBar>
+                            </div>
+                            <div class="col-12 my-4">
+                                <div class="grid">
+                                    <div class="col-5 ">
+                                        <p-button label="ATRÁS"
+                                            styleClass="p-button-danger p-button-rounded p-button-outlined p-button-sm p-button-block"
+                                            [style]="{width: '75%'}" (click)="backOfferPage()"></p-button>
+                                    </div>
+                                    <div class="col-5 col-offset-2 ">
+                                        <p-button label="SIGUIENTE"
+                                            styleClass="p-button-danger p-button-rounded p-button-sm p-button-block"
+                                            [style]="{width: '75%'}" [disabled]="btnNextOfferTypePage"
+                                            (click)="nextOfferPage()">
+                                        </p-button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col"></div>
+                </div>
+            </div>
+        </div>
+        <!-- End OfferTypePage -->
+        <!-- TitlePage -->
+        <div *ngSwitchCase="PageNames.TitlePage">
+            <div class="grid">
+                <div class="col-4 sm:col-12 md:col-8 lg:col-4">
+                    <p-scrollPanel [style]="{width: '100%', height: '600px'}">
+                        <div class="grid h-full m-0 surface-200">
+                            <div class="col-12">
+                                <div class="text-center">
+                                    <h2 class="mb-0">Carácteristicas de la publicación</h2>
+                                    <p>Coloca un título y una breve descripción</p>
+
+                                </div>
+                            </div>
+                            <div class="col-10 col-offset-1">
+                                <div class="card">
+                                    <div class="field">
+                                        <label>*Título</label>
+                                        <input type="text" pInputText class="block w-full" formControlName="title"
+                                            placeholder="..." />
+                                        <small class="text-red" *ngIf="fiedlIsValid('title')">El título es
+                                            requerido.</small>
+                                    </div>
+                                    <div class="field">
+                                        <label>*Descripción del inmueble</label>
+                                        <textarea [rows]="5" [cols]="30" class="block w-full" pInputTextarea
+                                            [autoResize]="true" formControlName="description"></textarea>
+                                        <small class="text-red" *ngIf="fiedlIsValid('title')">La descripción es
+                                            requerida.</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </p-scrollPanel>
+                    <div class="grid  bg-white shadow-1">
+                        <div class="col-12 p-0 m-0">
+                            <p-progressBar [value]="progressBarValue" [style]="{'height': '6px'}" [showValue]="false">
+                            </p-progressBar>
+                        </div>
+                        <div class="col-12 my-4">
+                            <div class="grid">
+                                <div class="col-5 text-center">
+                                    <p-button label="ATRÁS"
+                                        styleClass="p-button-danger p-button-rounded p-button-outlined p-button-sm p-button-block"
+                                        [style]="{width: '75%'}" (click)="backTitlePage()"></p-button>
+                                </div>
+                                <div class="col-5 col-offset-2 text-center">
+                                    <p-button label="SIGUIENTE"
+                                        styleClass="p-button-danger p-button-rounded p-button-sm p-button-block"
+                                        [style]="{width: '75%'}" (click)="nextTitlePage()">
+                                    </p-button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- preview -->
+                <div class="col-12 sm:col-12 md:col-8 lg:col-8 mt-2" style="height: 90vh;">
+                    <p-scrollPanel [style]="{width: '100%', height: '100%'}">
+                        <div class="grid mx-4">
+                            <div class="col-12 text-center">
+                                <h3 class="text-primary"><i class="pi pi-info-circle"></i> Vista previa de tu captación
+                                </h3>
+                            </div>
+                            <div class="col-12 border-round surface-200">
+                                <div class="grid px-4">
+                                    <div class="col-10">
+                                        <h2>
+                                            {{propetyForm.value.title}}
+                                        </h2>
+                                        <h3>
+                                            {{_property_type | titlecase }} en {{_offer_type | titlecase}},
+                                            {{propetyForm.value.address}}
+                                        </h3>
+                                        <h4><img src="/assets/icons/pin_home.svg" class="mr-2" alt="icon"> <span
+                                                class="opacity-50">Ubicación</span></h4>
+                                    </div>
+                                    <div class="col-2 text-center">
+                                        <h4>{{_property_type}}</h4>
+                                        <div class="grid">
+                                            <div class="col-9">
+                                                <input type="number" pInputText class="block w-full"
+                                                    formControlName="price" [(ngModel)]="propetyForm.value.price"
+                                                    placeholder="..." />
+                                            </div>
+                                            <div
+                                                class="col-3 flex align-items-center justify-content-center opacity-50">
+                                                {{propetyForm.value.currency_type}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <h4>Descripción</h4>
+                                        <p class="opacity-50">{{propetyForm.value.description}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 border-round surface-200 mt-4">
+                                <div class="grid px-4">
+                                    <div class="col-12">
+                                        <h2>Distribución</h2>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="grid">
+                                            <div class="col-4 text-center text-xl">
+                                                <img src="/assets/icons/ruler.svg" class="mr-2" width="26rem"
+                                                    alt="icon">
+                                                Superficie: {{propetyForm.value.total_surface}}
+                                                {{propetyForm.value.length_unit}}
+                                            </div>
+                                            <div class="col-4 text-center text-xl">
+                                                <img src="/assets/icons/bed.svg" class="mr-2" width="26rem" alt="icon">
+                                                Dormitorios: {{propetyForm.value.no_bedrooms}}
+                                            </div>
+                                            <div class="col-4 text-center text-xl">
+                                                <img src="/assets/icons/shower.svg" class="mr-2" width="26rem"
+                                                    alt="icon">
+                                                Baños: {{propetyForm.value.no_bathrooms}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 border-round surface-200 mt-4">
+                                <div class="grid px-4">
+                                    <div class="col-12">
+                                        <h2>Áreas Adicionales</h2>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="grid">
+                                            <div *ngFor="let item of features">
+                                                <div class="col text-left text-lg" *ngIf="item.isSelected">
+                                                    <img src="/assets/icons/dot.svg" class="mr-2" width="14rem"
+                                                        alt="icon">
+                                                    <span>{{item.name}}</span><span
+                                                        *ngIf="item.multiple">&nbsp;:&nbsp;{{item.quantity}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 border-round surface-200 mt-4">
+                                <div class="grid px-4">
+                                    <div class="col-12">
+                                        <h2>Ubicación</h2>
+                                        <p class="opacity-50">{{propetyForm.value.address}}</p>
+                                        <p class="opacity-50">{{propetyForm.value.property_location}}</p>
+                                    </div>
+                                    <div class="col-12">
+
+                                        <p-gmap [options]="optionsMapPreview" [overlays]="overlaysMapPreview"
+                                            [style]="{'width':'100%','height':'320px'}"
+                                            (onMapClick)="handleMapClick($event)">
+                                        </p-gmap>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 border-round surface-200 mt-4">
+                                <div class="grid px-4">
+                                    <div class="col-12">
+                                        <h2>Información del agente</h2>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="grid">
+                                            <div class="col-3">
+                                                <h4><img src="/assets/icons/user.svg" class="mr-2" width="26rem"
+                                                        alt="icon"><span class="opacity-50">{{user.name}}</span></h4>
+                                                <h4><img src="/assets/icons/telephone_outline.svg" class="mr-2"
+                                                        width="26rem" alt="icon"><span
+                                                        class="opacity-50">{{user.phone_number}}</span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </p-scrollPanel>
+                </div>
+                <!-- end preview -->
+            </div>
+
+        </div>
+        <!-- End TitlePage -->
+
+        <!-- AddressPage -->
+        <div *ngSwitchCase="PageNames.AddressPage">
+            <div class="grid">
+                <div class="col-4 sm:col-12 md:col-8 lg:col-4">
+                    <p-scrollPanel [style]="{width: '100%', height: '600px'}">
+                        <div class="grid h-full m-0 surface-200">
+                            <div class="col-12">
+                                <div class="text-center">
+                                    <h2 class="mb-0">Ubicación</h2>
+                                    <p>Especifica la ubicación</p>
+
+                                </div>
+                            </div>
+                            <div class="col-10 col-offset-1">
+                                <div class="card">
+                                    <div class="field">
+                                        <label>*Dirección</label>
+                                        <input type="text" pInputText class="block w-full" formControlName="address"
+                                            placeholder="..." />
+                                        <small class="text-red" *ngIf="fiedlIsValid('address')">El dato es
+                                            requerido.</small>
+                                    </div>
+                                    <div class="field">
+                                        <label>*Ubicación</label>
+                                        <input type="text" pInputText class="block w-full"
+                                            formControlName="property_location" placeholder="..." />
+                                        <small class="text-red" *ngIf="fiedlIsValid('property_location')">El dato es
+                                            requerido.</small>
+                                    </div>
+                                    <div class="field">
+                                        <label>*Departamento</label>
+                                        <select class="text-xl border-round h-3rem w-full"
+                                            formControlName="departmentId" [(ngModel)]="propetyForm.value.departmentId">
+                                            <option value="" [disabled]="true">(Seleccionar departamento)</option>
+                                            <option *ngFor="let item of departments" [value]="item.id">{{item.name}}
+                                            </option>
+                                        </select>
+                                        <small class="text-red" *ngIf="fiedlIsValid('departmentId')">El dato es
+                                            requerido.</small>
+                                    </div>
+                                    <div class="field">
+                                        <label>*País</label><br>
+                                        <select class="text-xl border-round h-3rem w-full" formControlName="countryId"
+                                            [(ngModel)]="propetyForm.value.countryId">
+                                            <option value="1">Bolivia</option>
+                                        </select>
+                                        <small class="text-red" *ngIf="fiedlIsValid('countryId')">El dato es
+                                            requerido.</small>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </p-scrollPanel>
+                    <div class="grid  bg-white shadow-1">
+                        <div class="col-12 p-0 m-0">
+                            <p-progressBar [value]="progressBarValue" [style]="{'height': '6px'}" [showValue]="false">
+                            </p-progressBar>
+                        </div>
+                        <div class="col-12 my-4">
+                            <div class="grid">
+                                <div class="col-5 text-center">
+                                    <p-button label="ATRÁS"
+                                        styleClass="p-button-danger p-button-rounded p-button-outlined p-button-sm p-button-block"
+                                        [style]="{width: '75%'}" (click)="backAddressPage()"></p-button>
+                                </div>
+                                <div class="col-5 col-offset-2 text-center">
+                                    <p-button label="SIGUIENTE"
+                                        styleClass="p-button-danger p-button-rounded p-button-sm p-button-block"
+                                        [style]="{width: '75%'}" (click)="nextAddressPage()">
+                                    </p-button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- preview -->
+                <div class="col-12 sm:col-12 md:col-8 lg:col-8 mt-2" style="height: 90vh;">
+                    <p-scrollPanel [style]="{width: '100%', height: '100%'}">
+                        <div class="grid mx-4">
+                            <div class="col-12 text-center">
+                                <h3 class="text-primary"><i class="pi pi-info-circle"></i> Vista previa de tu captación
+                                </h3>
+                            </div>
+                            <div class="col-12 border-round surface-200">
+                                <div class="grid px-4">
+                                    <div class="col-10">
+                                        <h2>
+                                            {{propetyForm.value.title}}
+                                        </h2>
+                                        <h3>
+                                            {{_property_type | titlecase }} en {{_offer_type | titlecase}},
+                                            {{propetyForm.value.address}}
+                                        </h3>
+                                        <h4><img src="/assets/icons/pin_home.svg" class="mr-2" alt="icon"> <span
+                                                class="opacity-50">Ubicación</span></h4>
+                                    </div>
+                                    <div class="col-2 text-center">
+                                        <h4>{{_property_type}}</h4>
+                                        <div class="grid">
+                                            <div class="col-9">
+                                                <input type="number" pInputText class="block w-full"
+                                                    formControlName="price" [(ngModel)]="propetyForm.value.price"
+                                                    placeholder="..." />
+                                            </div>
+                                            <div
+                                                class="col-3 flex align-items-center justify-content-center opacity-50">
+                                                {{propetyForm.value.currency_type}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <h4>Descripción</h4>
+                                        <p class="opacity-50">{{propetyForm.value.description}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 border-round surface-200 mt-4">
+                                <div class="grid px-4 py-0">
+                                    <div class="col-12">
+                                        <h2>Fotos</h2>
+                                    </div>
+                                    <div class="col-4" *ngFor="let file of _files">
+                                        <p-image [src]="file.objectURL" alt="Image" imageClass="border-round"
+                                            width="100%" [preview]="true">
+                                        </p-image>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 border-round surface-200 mt-4">
+                                <div class="grid px-4">
+                                    <div class="col-12">
+                                        <h2>Distribución</h2>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="grid">
+                                            <div class="col-4 text-center text-xl">
+                                                <img src="/assets/icons/ruler.svg" class="mr-2" width="26rem"
+                                                    alt="icon">
+                                                Superficie: {{propetyForm.value.total_surface}}
+                                                {{propetyForm.value.length_unit}}
+                                            </div>
+                                            <div class="col-4 text-center text-xl">
+                                                <img src="/assets/icons/bed.svg" class="mr-2" width="26rem" alt="icon">
+                                                Dormitorios: {{propetyForm.value.no_bedrooms}}
+                                            </div>
+                                            <div class="col-4 text-center text-xl">
+                                                <img src="/assets/icons/shower.svg" class="mr-2" width="26rem"
+                                                    alt="icon">
+                                                Baños: {{propetyForm.value.no_bathrooms}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 border-round surface-200 mt-4">
+                                <div class="grid px-4">
+                                    <div class="col-12">
+                                        <h2>Áreas Adicionales</h2>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="grid">
+                                            <div *ngFor="let item of features">
+                                                <div class="col text-left text-lg" *ngIf="item.isSelected">
+                                                    <img src="/assets/icons/dot.svg" class="mr-2" width="14rem"
+                                                        alt="icon">
+                                                    <span>{{item.name}}</span><span
+                                                        *ngIf="item.multiple">&nbsp;:&nbsp;{{item.quantity}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 border-round surface-200 mt-4">
+                                <div class="grid px-4">
+                                    <div class="col-12">
+                                        <h2>Ubicación</h2>
+                                        <p class="opacity-50">{{propetyForm.value.address}}</p>
+                                        <p class="opacity-50">{{propetyForm.value.property_location}}</p>
+                                    </div>
+                                    <div class="col-12">
+
+                                        <p-gmap [options]="optionsMapPreview" [overlays]="overlaysMapPreview"
+                                            [style]="{'width':'100%','height':'320px'}"
+                                            (onMapClick)="handleMapClick($event)">
+                                        </p-gmap>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 border-round surface-200 mt-4">
+                                <div class="grid px-4">
+                                    <div class="col-12">
+                                        <h2>Información del agente</h2>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="grid">
+                                            <div class="col-3">
+                                                <h4><img src="/assets/icons/user.svg" class="mr-2" width="26rem"
+                                                        alt="icon"><span class="opacity-50">{{user.name}}</span></h4>
+                                                <h4><img src="/assets/icons/telephone_outline.svg" class="mr-2"
+                                                        width="26rem" alt="icon"><span
+                                                        class="opacity-50">{{user.phone_number}}</span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </p-scrollPanel>
+                </div>
+                <!-- end preview -->
+            </div>
+
+        </div>
+        <!-- End AddressPage -->
+        <!-- MapPage -->
+        <div *ngSwitchCase="PageNames.MapPage">
+            <div class="grid">
+                <div class="col-12 sm:col-12 md:col-8 lg:col-4">
+                    <p-scrollPanel [style]="{width: '100%', height: '600px'}">
+                        <div class="grid h-full m-0 surface-200">
+                            <div class="col-12">
+                                <div class="text-center">
+                                    <h2 class="mb-0">Ubicación</h2>
+                                    <p>Haz clic para seleccionar la ubicación</p>
+
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="text-center my-2">
+                                    <button pButton type="button" label="Mi ubicación"
+                                        class="p-button-secondary p-button-outlined p-button-rounded p-button-sm"
+                                        icon="pi pi-map-marker"
+                                        (click)="getCurrentGPS(gmap.getMap(), gmapPreview.getMap())"></button>
+                                </div>
+                                <div class="card">
+                                    <p-gmap #gmap [options]="optionsMap" [overlays]="overlaysMap"
+                                        [style]="{'width':'100%','height':'320px'}"
+                                        (onMapClick)="handleMapClick($event)">
+                                    </p-gmap>
+                                </div>
+                            </div>
+                        </div>
+
+                    </p-scrollPanel>
+                    <div class="grid  bg-white shadow-1">
+                        <div class="col-12 p-0 m-0">
+                            <p-progressBar [value]="progressBarValue" [style]="{'height': '6px'}" [showValue]="false">
+                            </p-progressBar>
+                        </div>
+                        <div class="col-12 my-4">
+                            <div class="grid">
+                                <div class="col-5 text-center">
+                                    <p-button label="ATRÁS"
+                                        styleClass="p-button-danger p-button-rounded p-button-outlined p-button-sm p-button-block"
+                                        [style]="{width: '75%'}" (click)="backMapPage()"></p-button>
+                                </div>
+                                <div class="col-5 col-offset-2 text-center">
+                                    <p-button label="SIGUIENTE"
+                                        styleClass="p-button-danger p-button-rounded p-button-sm p-button-block"
+                                        [style]="{width: '75%'}" (click)="nextMapPage()">
+                                    </p-button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- preview -->
+                <div class="col-12 sm:col-12 md:col-8 lg:col-8 mt-2" style="height: 90vh;">
+                    <p-scrollPanel [style]="{width: '100%', height: '100%'}">
+                        <div class="grid mx-4">
+                            <div class="col-12 text-center">
+                                <h3 class="text-primary"><i class="pi pi-info-circle"></i> Vista previa de tu captación
+                                </h3>
+                            </div>
+                            <div class="col-12 border-round surface-200">
+                                <div class="grid px-4">
+                                    <div class="col-10">
+                                        <h2>
+                                            {{propetyForm.value.title}}
+                                        </h2>
+                                        <h3>
+                                            {{_property_type | titlecase }} en {{_offer_type | titlecase}},
+                                            {{propetyForm.value.address}}
+                                        </h3>
+                                        <h4><img src="/assets/icons/pin_home.svg" class="mr-2" alt="icon"> <span
+                                                class="opacity-50">Ubicación</span></h4>
+                                    </div>
+                                    <div class="col-2 text-center">
+                                        <h4>{{_property_type}}</h4>
+                                        <div class="grid">
+                                            <div class="col-9">
+                                                <input type="number" pInputText class="block w-full"
+                                                    formControlName="price" [(ngModel)]="propetyForm.value.price"
+                                                    placeholder="..." />
+                                            </div>
+                                            <div
+                                                class="col-3 flex align-items-center justify-content-center opacity-50">
+                                                {{propetyForm.value.currency_type}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <h4>Descripción</h4>
+                                        <p class="opacity-50">{{propetyForm.value.description}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 border-round surface-200 mt-4">
+                                <div class="grid px-4">
+                                    <div class="col-12">
+                                        <h2>Distribución</h2>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="grid">
+                                            <div class="col-4 text-center text-xl">
+                                                <img src="/assets/icons/ruler.svg" class="mr-2" width="26rem"
+                                                    alt="icon">
+                                                Superficie: {{propetyForm.value.total_surface}}
+                                                {{propetyForm.value.length_unit}}
+                                            </div>
+                                            <div class="col-4 text-center text-xl">
+                                                <img src="/assets/icons/bed.svg" class="mr-2" width="26rem" alt="icon">
+                                                Dormitorios: {{propetyForm.value.no_bedrooms}}
+                                            </div>
+                                            <div class="col-4 text-center text-xl">
+                                                <img src="/assets/icons/shower.svg" class="mr-2" width="26rem"
+                                                    alt="icon">
+                                                Baños: {{propetyForm.value.no_bathrooms}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 border-round surface-200 mt-4">
+                                <div class="grid px-4">
+                                    <div class="col-12">
+                                        <h2>Áreas Adicionales</h2>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="grid">
+                                            <div *ngFor="let item of features">
+                                                <div class="col text-left text-lg" *ngIf="item.isSelected">
+                                                    <img src="/assets/icons/dot.svg" class="mr-2" width="14rem"
+                                                        alt="icon">
+                                                    <span>{{item.name}}</span><span
+                                                        *ngIf="item.multiple">&nbsp;:&nbsp;{{item.quantity}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 border-round surface-200 mt-4">
+                                <div class="grid px-4">
+                                    <div class="col-12">
+                                        <h2>Ubicación</h2>
+                                        <p class="opacity-50">{{propetyForm.value.address}}</p>
+                                        <p class="opacity-50">{{propetyForm.value.property_location}}</p>
+                                    </div>
+                                    <div class="col-12">
+                                        <p-gmap #gmapPreview [options]="optionsMapPreview"
+                                            [overlays]="overlaysMapPreview" [style]="{'width':'100%','height':'320px'}"
+                                            (onMapClick)="handleMapClick($event)">
+                                        </p-gmap>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 border-round surface-200 mt-4">
+                                <div class="grid px-4">
+                                    <div class="col-12">
+                                        <h2>Información del agente</h2>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="grid">
+                                            <div class="col-3">
+                                                <h4><img src="/assets/icons/user.svg" class="mr-2" width="26rem"
+                                                        alt="icon"><span class="opacity-50">{{user.name}}</span></h4>
+                                                <h4><img src="/assets/icons/telephone_outline.svg" class="mr-2"
+                                                        width="26rem" alt="icon"><span
+                                                        class="opacity-50">{{user.phone_number}}</span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </p-scrollPanel>
+                </div>
+                <!-- end preview -->
+            </div>
+
+        </div>
+        <!-- End MapPage -->
+        <!-- PricePage -->
+        <div *ngSwitchCase="PageNames.PricePage">
+            <div class="grid">
+                <div class="col-4 sm:col-12 md:col-8 lg:col-4">
+                    <p-scrollPanel [style]="{width: '100%', height: '600px'}">
+                        <div class="grid h-full m-0 surface-200">
+                            <div class="col-12">
+                                <div class="text-center">
+                                    <h2 class="mb-0">Precio</h2>
+                                    <p>Ingrese los precios correspondientes</p>
+                                </div>
+                            </div>
+                            <div class="col-10 col-offset-1">
+                                <div class="card">
+                                    <div class="formgrid grid">
+                                        <div class="field col">
+                                            <label>*Precio / Mes</label>
+                                            <input type="number" pInputText class="block w-full" formControlName="price"
+                                                placeholder="..." [(ngModel)]="propetyForm.value.price" />
+                                            <small class="text-red" *ngIf="fiedlIsValid('price')">El dato es
+                                                requerido.</small>
+                                        </div>
+                                        <div class="field col-4">
+                                            <label>*Moneda</label><br>
+                                            <select class="text-xl border-round h-3rem w-full"
+                                                formControlName="currency_type"
+                                                [(ngModel)]="propetyForm.value.currency_type">
+                                                <option value="BOB" selected>BOB</option>
+                                                <option value="USD">USD</option>
+                                            </select>
+                                            <small class="text-red" *ngIf="fiedlIsValid('currency_type')">El dato es
+                                                requerido.</small>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </p-scrollPanel>
+                    <div class="grid  bg-white shadow-1">
+                        <div class="col-12 p-0 m-0">
+                            <p-progressBar [value]="progressBarValue" [style]="{'height': '6px'}" [showValue]="false">
+                            </p-progressBar>
+                        </div>
+                        <div class="col-12 my-4">
+                            <div class="grid">
+                                <div class="col-5 text-center">
+                                    <p-button label="ATRÁS"
+                                        styleClass="p-button-danger p-button-rounded p-button-outlined p-button-sm p-button-block"
+                                        [style]="{width: '75%'}" (click)="backPricePage()"></p-button>
+                                </div>
+                                <div class="col-5 col-offset-2 text-center">
+                                    <p-button label="SIGUIENTE"
+                                        styleClass="p-button-danger p-button-rounded p-button-sm p-button-block"
+                                        [style]="{width: '75%'}" (click)="nextPricePage()">
+                                    </p-button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- preview -->
+                <div class="col-12 sm:col-12 md:col-8 lg:col-8 mt-2" style="height: 90vh;">
+                    <p-scrollPanel [style]="{width: '100%', height: '100%'}">
+                        <div class="grid mx-4">
+                            <div class="col-12 text-center">
+                                <h3 class="text-primary"><i class="pi pi-info-circle"></i> Vista previa de tu captación
+                                </h3>
+                            </div>
+                            <div class="col-12 border-round surface-200">
+                                <div class="grid px-4">
+                                    <div class="col-10">
+                                        <h2>
+                                            {{propetyForm.value.title}}
+                                        </h2>
+                                        <h3>
+                                            {{_property_type | titlecase }} en {{_offer_type | titlecase}},
+                                            {{propetyForm.value.address}}
+                                        </h3>
+                                        <h4><img src="/assets/icons/pin_home.svg" class="mr-2" alt="icon"> <span
+                                                class="opacity-50">Ubicación</span></h4>
+                                    </div>
+                                    <div class="col-2 text-center">
+                                        <h4>{{_property_type}}</h4>
+                                        <div class="grid">
+                                            <div class="col-9">
+                                                <input type="number" pInputText class="block w-full"
+                                                    formControlName="price" [(ngModel)]="propetyForm.value.price"
+                                                    placeholder="..." />
+                                            </div>
+                                            <div
+                                                class="col-3 flex align-items-center justify-content-center opacity-50">
+                                                {{propetyForm.value.currency_type}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <h4>Descripción</h4>
+                                        <p class="opacity-50">{{propetyForm.value.description}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 border-round surface-200 mt-4">
+                                <div class="grid px-4">
+                                    <div class="col-12">
+                                        <h2>Distribución</h2>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="grid">
+                                            <div class="col-4 text-center text-xl">
+                                                <img src="/assets/icons/ruler.svg" class="mr-2" width="26rem"
+                                                    alt="icon">
+                                                Superficie: {{propetyForm.value.total_surface}}
+                                                {{propetyForm.value.length_unit}}
+                                            </div>
+                                            <div class="col-4 text-center text-xl">
+                                                <img src="/assets/icons/bed.svg" class="mr-2" width="26rem" alt="icon">
+                                                Dormitorios: {{propetyForm.value.no_bedrooms}}
+                                            </div>
+                                            <div class="col-4 text-center text-xl">
+                                                <img src="/assets/icons/shower.svg" class="mr-2" width="26rem"
+                                                    alt="icon">
+                                                Baños: {{propetyForm.value.no_bathrooms}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 border-round surface-200 mt-4">
+                                <div class="grid px-4">
+                                    <div class="col-12">
+                                        <h2>Áreas Adicionales</h2>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="grid">
+                                            <div *ngFor="let item of features">
+                                                <div class="col text-left text-lg" *ngIf="item.isSelected">
+                                                    <img src="/assets/icons/dot.svg" class="mr-2" width="14rem"
+                                                        alt="icon">
+                                                    <span>{{item.name}}</span><span
+                                                        *ngIf="item.multiple">&nbsp;:&nbsp;{{item.quantity}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 border-round surface-200 mt-4">
+                                <div class="grid px-4">
+                                    <div class="col-12">
+                                        <h2>Ubicación</h2>
+                                        <p class="opacity-50">{{propetyForm.value.address}}</p>
+                                        <p class="opacity-50">{{propetyForm.value.property_location}}</p>
+                                    </div>
+                                    <div class="col-12">
+
+                                        <p-gmap [options]="optionsMapPreview" [overlays]="overlaysMapPreview"
+                                            [style]="{'width':'100%','height':'320px'}"
+                                            (onMapClick)="handleMapClick($event)">
+                                        </p-gmap>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 border-round surface-200 mt-4">
+                                <div class="grid px-4">
+                                    <div class="col-12">
+                                        <h2>Información del agente</h2>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="grid">
+                                            <div class="col-3">
+                                                <h4><img src="/assets/icons/user.svg" class="mr-2" width="26rem"
+                                                        alt="icon"><span class="opacity-50">{{user.name}}</span></h4>
+                                                <h4><img src="/assets/icons/telephone_outline.svg" class="mr-2"
+                                                        width="26rem" alt="icon"><span
+                                                        class="opacity-50">{{user.phone_number}}</span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </p-scrollPanel>
+                </div>
+                <!-- end preview -->
+            </div>
+
+        </div>
+        <!-- End PricePage -->
+        <!-- DataPage -->
+        <div *ngSwitchCase="PageNames.DataPage">
+            <div class="grid">
+                <div class="col-12 sm:col-12 md:col-8 lg:col-4 surface-200">
+                    <p-scrollPanel [style]="{width: '100%', height: '600px'}">
+                        <div class="grid h-full m-0 surface-200">
+                            <div class="col-12">
+                                <div class="text-center">
+                                    <h2 class="mb-0">Inmueble</h2>
+                                    <p>Especifica las características del inmueble</p>
+                                </div>
+                            </div>
+                            <div class="col-10 col-offset-1">
+                                <div class="card">
+                                    <div class="grid">
+                                        <div class="col-12">
+                                            <div class="grid text-center">
+                                                <div class="col">
+                                                    Dormitorios
+                                                </div>
+                                                <div class="col">
+                                                    <button pButton type="button"
+                                                        class="p-button-raised p-button-rounded p-button-outlined p-button-secondary w-2rem h-2rem"
+                                                        icon="pi pi-minus" (click)="minusBedrooms()"></button>
+                                                </div>
+                                                <div class="col-3">
+                                                    <input type="number" pInputText class="block w-full"
+                                                        formControlName="no_bedrooms" placeholder="..."
+                                                        [(ngModel)]="propetyForm.value.no_bedrooms"
+                                                        readonly="readonly" />
+                                                    <small class="text-red" *ngIf="fiedlIsValid('no_bedrooms')">El dato
+                                                        es
+                                                        requerido.</small>
+                                                </div>
+                                                <div class="col">
+                                                    <button pButton type="button"
+                                                        class="p-button-raised p-button-rounded p-button-outlined p-button-secondary w-2rem h-2rem"
+                                                        icon="pi pi-plus" (click)="plusBedrooms()"></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <p-divider></p-divider>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="grid text-center">
+                                                <div class="col">
+                                                    Baños
+                                                </div>
+                                                <div class="col">
+                                                    <button pButton type="button"
+                                                        class="p-button-raised p-button-rounded p-button-outlined p-button-secondary w-2rem h-2rem"
+                                                        icon="pi pi-minus" (click)="minusBathrooms()"></button>
+                                                </div>
+                                                <div class="col-3">
+                                                    <input type="number" pInputText class="block w-full"
+                                                        formControlName="no_bathrooms" placeholder="..."
+                                                        [(ngModel)]="propetyForm.value.no_bathrooms"
+                                                        readonly="readonly" />
+                                                    <small class="text-red" *ngIf="fiedlIsValid('no_bathrooms')">El dato
+                                                        es
+                                                        requerido.</small>
+                                                </div>
+                                                <div class="col">
+                                                    <button pButton type="button"
+                                                        class="p-button-raised p-button-rounded p-button-outlined p-button-secondary w-2rem h-2rem"
+                                                        icon="pi pi-plus" (click)="plusBathrooms()"></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <p-divider></p-divider>
+                                        </div>
+                                        <div *ngFor="let item of features">
+                                            <div class="col-12" *ngIf="item.multiple">
+                                                <div class="grid text-center">
+                                                    <div class="col">
+                                                        {{item.name}}
+                                                    </div>
+                                                    <div class="col">
+                                                        <button pButton type="button"
+                                                            class="p-button-raised p-button-rounded p-button-outlined p-button-secondary w-2rem h-2rem"
+                                                            icon="pi pi-minus" (click)="minusFeature(item)"></button>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <input type="number" pInputText class="block w-full"
+                                                            [(ngModel)]="item.quantity"
+                                                            [ngModelOptions]="{standalone: true}" readonly="readonly">
+                                                    </div>
+                                                    <div class="col">
+                                                        <button pButton type="button"
+                                                            class="p-button-raised p-button-rounded p-button-outlined p-button-secondary w-2rem h-2rem"
+                                                            icon="pi pi-plus" (click)="plusFeature(item)"></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <p-divider></p-divider>
+                                        </div>
+                                        <div class="col-12">
+                                            <label>*Superficie de terreno</label>
+                                            <input type="number" pInputText class="block w-full"
+                                                formControlName="total_surface" placeholder="..."
+                                                [(ngModel)]="propetyForm.value.total_surface" />
+                                            <small class="text-red" *ngIf="fiedlIsValid('total_surface')">El dato es
+                                                requerido.</small>
+                                        </div>
+                                        <div class="col-12">
+                                            <label>*Superficie de construcción</label>
+                                            <input type="number" pInputText class="block w-full"
+                                                formControlName="constructed_surface" placeholder="..."
+                                                [(ngModel)]="propetyForm.value.constructed_surface" />
+                                            <small class="text-red" *ngIf="fiedlIsValid('constructed_surface')">El dato
+                                                es
+                                                requerido.</small>
+                                        </div>
+                                        <div class="col-12 mb-6">
+                                            <label>*Unidad</label><br>
+                                            <select class="text-xl border-round h-3rem w-full"
+                                                formControlName="length_unit"
+                                                [(ngModel)]="propetyForm.value.length_unit">
+                                                <option value="M2" selected> M2 </option>
+                                            </select>
+                                            <small class="text-red" *ngIf="fiedlIsValid('currency_type')">El dato es
+                                                requerido.</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </p-scrollPanel>
+                    <div class="grid  bg-white shadow-1">
+                        <div class="col-12 p-0 m-0">
+                            <p-progressBar [value]="progressBarValue" [style]="{'height': '6px'}" [showValue]="false">
+                            </p-progressBar>
+                        </div>
+                        <div class="col-12 my-4">
+                            <div class="grid">
+                                <div class="col-5 text-center">
+                                    <p-button label="ATRÁS"
+                                        styleClass="p-button-danger p-button-rounded p-button-outlined p-button-sm p-button-block"
+                                        [style]="{width: '75%'}" (click)="backDataPage()"></p-button>
+                                </div>
+                                <div class="col-5 col-offset-2 text-center">
+                                    <p-button label="SIGUIENTE"
+                                        styleClass="p-button-danger p-button-rounded p-button-sm p-button-block"
+                                        [style]="{width: '75%'}" (click)="nextDataPage()">
+                                    </p-button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- preview -->
+                <div class="col-12 sm:col-12 md:col-8 lg:col-8 mt-2" style="height: 90vh;">
+                    <p-scrollPanel [style]="{width: '100%', height: '100%'}">
+                        <div class="grid mx-4">
+                            <div class="col-12 text-center">
+                                <h3 class="text-primary"><i class="pi pi-info-circle"></i> Vista previa de tu captación
+                                </h3>
+                            </div>
+                            <div class="col-12 border-round surface-200">
+                                <div class="grid px-4">
+                                    <div class="col-10">
+                                        <h2>
+                                            {{propetyForm.value.title}}
+                                        </h2>
+                                        <h3>
+                                            {{_property_type | titlecase }} en {{_offer_type | titlecase}},
+                                            {{propetyForm.value.address}}
+                                        </h3>
+                                        <h4><img src="/assets/icons/pin_home.svg" class="mr-2" alt="icon"> <span
+                                                class="opacity-50">Ubicación</span></h4>
+                                    </div>
+                                    <div class="col-2 text-center">
+                                        <h4>{{_property_type}}</h4>
+                                        <div class="grid">
+                                            <div class="col-9">
+                                                <input type="number" pInputText class="block w-full"
+                                                    formControlName="price" [(ngModel)]="propetyForm.value.price"
+                                                    placeholder="..." />
+                                            </div>
+                                            <div
+                                                class="col-3 flex align-items-center justify-content-center opacity-50">
+                                                {{propetyForm.value.currency_type}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <h4>Descripción</h4>
+                                        <p class="opacity-50">{{propetyForm.value.description}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 border-round surface-200 mt-4">
+                                <div class="grid px-4">
+                                    <div class="col-12">
+                                        <h2>Distribución</h2>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="grid">
+                                            <div class="col-4 text-center text-xl">
+                                                <img src="/assets/icons/ruler.svg" class="mr-2" width="26rem"
+                                                    alt="icon">
+                                                Superficie: {{propetyForm.value.total_surface}}
+                                                {{propetyForm.value.length_unit}}
+                                            </div>
+                                            <div class="col-4 text-center text-xl">
+                                                <img src="/assets/icons/bed.svg" class="mr-2" width="26rem" alt="icon">
+                                                Dormitorios: {{propetyForm.value.no_bedrooms}}
+                                            </div>
+                                            <div class="col-4 text-center text-xl">
+                                                <img src="/assets/icons/shower.svg" class="mr-2" width="26rem"
+                                                    alt="icon">
+                                                Baños: {{propetyForm.value.no_bathrooms}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 border-round surface-200 mt-4">
+                                <div class="grid px-4">
+                                    <div class="col-12">
+                                        <h2>Áreas Adicionales</h2>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="grid">
+                                            <div *ngFor="let item of features">
+                                                <div class="col text-left text-lg" *ngIf="item.isSelected">
+                                                    <img src="/assets/icons/dot.svg" class="mr-2" width="14rem"
+                                                        alt="icon">
+                                                    <span>{{item.name}}</span><span
+                                                        *ngIf="item.multiple">&nbsp;:&nbsp;{{item.quantity}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 border-round surface-200 mt-4">
+                                <div class="grid px-4">
+                                    <div class="col-12">
+                                        <h2>Ubicación</h2>
+                                        <p class="opacity-50">{{propetyForm.value.address}}</p>
+                                        <p class="opacity-50">{{propetyForm.value.property_location}}</p>
+                                    </div>
+                                    <div class="col-12">
+
+                                        <p-gmap [options]="optionsMapPreview" [overlays]="overlaysMapPreview"
+                                            [style]="{'width':'100%','height':'320px'}"
+                                            (onMapClick)="handleMapClick($event)">
+                                        </p-gmap>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 border-round surface-200 mt-4">
+                                <div class="grid px-4">
+                                    <div class="col-12">
+                                        <h2>Información del agente</h2>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="grid">
+                                            <div class="col-3">
+                                                <h4><img src="/assets/icons/user.svg" class="mr-2" width="26rem"
+                                                        alt="icon"><span class="opacity-50">{{user.name}}</span></h4>
+                                                <h4><img src="/assets/icons/telephone_outline.svg" class="mr-2"
+                                                        width="26rem" alt="icon"><span
+                                                        class="opacity-50">{{user.phone_number}}</span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </p-scrollPanel>
+                </div>
+                <!-- end preview -->
+            </div>
+
+        </div>
+        <!-- End DataPage -->
+        <!-- FeaturesPage -->
+        <div *ngSwitchCase="PageNames.FeaturesPage">
+            <div class="grid">
+                <div class="col-12 sm:col-12 md:col-8 lg:col-4">
+                    <p-scrollPanel [style]="{width: '100%', height: '650px', background:'#EEEEEE'}">
+                        <div class="grid h-full m-0 surface-200">
+                            <div class="col-12">
+                                <div class="text-center">
+                                    <h2 class="mb-0">Caracteristicas adicionales</h2>
+                                    <p>Seleccione las comodidades y servicios con las que cuenta</p>
+                                </div>
+                            </div>
+                            <div class="col-8 col-offset-2">
+                                <div class="grid mb-6">
+                                    <div class="col-6" *ngFor="let item of features">
+                                        <div *ngIf="!item.multiple">
+                                            <div class="text-center border-1 border-1 border-round mx-4 bg-white shadow-1 cursor-pointer"
+                                                (click)="item.styleActive = !item.styleActive ; selectFeature(item,1)"
+                                                [ngClass]="item.styleActive ? 'feature-selected' : ''">
+                                                <img [src]="baseUrl+'/'+item.icon" alt="img" width="35%" class="mt-4">
+                                                <h5>
+                                                    {{item.name}}
+                                                </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </p-scrollPanel>
+                    <div class="grid  bg-white shadow-1">
+                        <div class="col-12 p-0 m-0">
+                            <p-progressBar [value]="progressBarValue" [style]="{'height': '6px'}" [showValue]="false">
+                            </p-progressBar>
+                        </div>
+                        <div class="col-12 my-4">
+                            <div class="grid">
+                                <div class="col-5 text-center">
+                                    <p-button label="ATRÁS"
+                                        styleClass="p-button-danger p-button-rounded p-button-outlined p-button-sm p-button-block"
+                                        [style]="{width: '75%'}" (click)="backFeaturesPage()"></p-button>
+                                </div>
+                                <div class="col-5 col-offset-2 text-center">
+                                    <p-button label="PUBLICAR"
+                                        styleClass="p-button-danger p-button-rounded p-button-sm p-button-block"
+                                        [style]="{width: '75%'}" (click)="publish()">
+                                    </p-button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- preview -->
+                <div class="col-12 sm:col-12 md:col-8 lg:col-8 mt-2" style="height: 90vh;">
+                    <p-scrollPanel [style]="{width: '100%', height: '100%'}">
+                        <div class="grid mx-4">
+                            <div class="col-12 text-center">
+                                <h3 class="text-primary"><i class="pi pi-info-circle"></i> Vista previa de tu captación
+                                </h3>
+                            </div>
+                            <div class="col-12 border-round surface-200">
+                                <div class="grid px-4">
+                                    <div class="col-10">
+                                        <h2>
+                                            {{propetyForm.value.title}}
+                                        </h2>
+                                        <h3>
+                                            {{_property_type | titlecase }} en {{_offer_type | titlecase}},
+                                            {{propetyForm.value.address}}
+                                        </h3>
+                                        <h4><img src="/assets/icons/pin_home.svg" class="mr-2" alt="icon"> <span
+                                                class="opacity-50">Ubicación</span></h4>
+                                    </div>
+                                    <div class="col-2 text-center">
+                                        <h4>{{_property_type}}</h4>
+                                        <div class="grid">
+                                            <div class="col-9">
+                                                <input type="number" pInputText class="block w-full"
+                                                    formControlName="price" [(ngModel)]="propetyForm.value.price"
+                                                    placeholder="..." />
+                                            </div>
+                                            <div
+                                                class="col-3 flex align-items-center justify-content-center opacity-50">
+                                                {{propetyForm.value.currency_type}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <h4>Descripción</h4>
+                                        <p class="opacity-50">{{propetyForm.value.description}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 border-round surface-200 mt-4">
+                                <div class="grid px-4">
+                                    <div class="col-12">
+                                        <h2>Distribución</h2>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="grid">
+                                            <div class="col-4 text-center text-xl">
+                                                <img src="/assets/icons/ruler.svg" class="mr-2" width="26rem"
+                                                    alt="icon">
+                                                Superficie: {{propetyForm.value.total_surface}}
+                                                {{propetyForm.value.length_unit}}
+                                            </div>
+                                            <div class="col-4 text-center text-xl">
+                                                <img src="/assets/icons/bed.svg" class="mr-2" width="26rem" alt="icon">
+                                                Dormitorios: {{propetyForm.value.no_bedrooms}}
+                                            </div>
+                                            <div class="col-4 text-center text-xl">
+                                                <img src="/assets/icons/shower.svg" class="mr-2" width="26rem"
+                                                    alt="icon">
+                                                Baños: {{propetyForm.value.no_bathrooms}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 border-round surface-200 mt-4">
+                                <div class="grid px-4">
+                                    <div class="col-12">
+                                        <h2>Áreas Adicionales</h2>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="grid">
+                                            <div *ngFor="let item of features">
+                                                <div class="col text-left text-lg" *ngIf="item.isSelected">
+                                                    <img src="/assets/icons/dot.svg" class="mr-2" width="14rem"
+                                                        alt="icon">
+                                                    <span>{{item.name}}</span><span
+                                                        *ngIf="item.multiple">&nbsp;:&nbsp;{{item.quantity}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 border-round surface-200 mt-4">
+                                <div class="grid px-4">
+                                    <div class="col-12">
+                                        <h2>Ubicación</h2>
+                                        <p class="opacity-50">{{propetyForm.value.address}}</p>
+                                        <p class="opacity-50">{{propetyForm.value.property_location}}</p>
+                                    </div>
+                                    <div class="col-12">
+
+                                        <p-gmap [options]="optionsMapPreview" [overlays]="overlaysMapPreview"
+                                            [style]="{'width':'100%','height':'320px'}"
+                                            (onMapClick)="handleMapClick($event)">
+                                        </p-gmap>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 border-round surface-200 mt-4">
+                                <div class="grid px-4">
+                                    <div class="col-12">
+                                        <h2>Información del agente</h2>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="grid">
+                                            <div class="col-3">
+                                                <h4><img src="/assets/icons/user.svg" class="mr-2" width="26rem"
+                                                        alt="icon"><span class="opacity-50">{{user.name}}</span></h4>
+                                                <h4><img src="/assets/icons/telephone_outline.svg" class="mr-2"
+                                                        width="26rem" alt="icon"><span
+                                                        class="opacity-50">{{user.phone_number}}</span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </p-scrollPanel>
+                </div>
+                <!-- end preview -->
+            </div>
+
+        </div>
+        <!-- End FeaturesPage -->
+
+    </div>
+</form>

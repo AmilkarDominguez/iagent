@@ -1,0 +1,47 @@
+//Fonts
+@import url("http://fonts.cdnfonts.com/css/futura-std-2");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
+// @import "../node_modules/primeflex/primeflex.css";
+// @import "../node_modules/primeicons/primeicons.css";
+// @import "../node_modules/primeng/resources/themes/lara-light-purple/theme.css";
+
+:root {
+    --primary-color: #ff666c;
+    --primary-color-text: #ff666c;
+    --secondary-color: #AA4448;
+    --red-color: #ff0008;
+    --white: #ffffff;
+}
+
+* {
+    font-family: "Futura Std", sans-serif;
+    //--primary-color: #ff0000 !important;
+}
+
+.font-primary {
+    font-family: "Futura Std", sans-serif;
+}
+.font-secondary {
+    font-family: "Montserrat", sans-serif;
+}
+
+.text-primary {
+    color: var(--primary-color);
+}
+.text-red {
+    color: var(--red-color);
+}
+
+html,
+body {
+    //margin: 0;
+    //background-color: var(--surface-b);
+    font-family: var(--font-family);
+    //border: #ff0000 2px solid;
+}
+
+.text-layout {
+    color: var(--cutom-primary);
+}
+

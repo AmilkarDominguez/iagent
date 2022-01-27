@@ -1,0 +1,64 @@
+<p-toast></p-toast>
+
+<p-card [style]="{'width': '50rem', 'margin': '2em'}">
+    <div class="text-center">
+
+        <img src="./assets/logo_iagent.svg" width="20%" alt="">
+        <h2><b>REGISTRARSE</b></h2>
+    </div>
+
+
+    <form autocomplete="off" [formGroup]="registerForm" (ngSubmit)="register()">
+
+        <div class="p-grid p-fluid mx-4">
+            <div class="col-12">
+                <div class="my-2"><i class="pi pi-user mr-2"></i>Nombre</div>
+                <input type="text" pInputText placeholder="Nombre" formControlName="name">
+                <p class="text-red" *ngIf="fiedlIsValid('name')">
+                    <i class="pi pi-ban"></i> El nombre debe ser mayor a 3 letras
+                </p>
+            </div>
+            <div class="col-12">
+                <div class="my-2"><i class="pi pi-user mr-2"></i>Apellido</div>
+                <input type="text" pInputText placeholder="Apellido" formControlName="lastname">
+                <p class="text-red" *ngIf="fiedlIsValid('lastname')">
+                    <i class="pi pi-ban"></i> El apellido debe ser mayor a 3 letras
+                </p>
+            </div>
+            <div class="col-12">
+                <div class="my-2"><i class="pi pi-user mr-2"></i>Correo</div>
+                <input type="text" pInputText placeholder="Correo" formControlName="email">
+                <p class="text-red" *ngIf="fiedlIsValid('email')">
+                    <i class="pi pi-ban"></i> El correo es incorrecto
+                </p>
+            </div>
+            <div class="col-12">
+                <div class="my-2"><i class="pi pi-key mr-2"></i>Contraseña</div>
+                <p-password formControlName="password" [toggleMask]="true" placeholder="Contraseña"
+                    promptLabel="Ingrese su contraseña" weakLabel="Seguridad baja" mediumLabel="Seguridad media"
+                    strongLabel="Seguridad alta"></p-password>
+                <p class="text-red" *ngIf="fiedlIsValid('password')">
+                    <i class="pi pi-ban"></i> La contraseña debe ser mayor a 8 carácteres
+                </p>
+            </div>
+            <div class="col-12">
+                <div class="my-2"><i class="pi pi-phone mr-2"></i>Teléfono</div>
+                <input type="tel" pInputText placeholder="Teléfono" formControlName="phone_number">
+                <p class="text-red" *ngIf="fiedlIsValid('phone_number')">
+                    <i class="pi pi-ban"></i> El teléfono debe ser válido
+                </p>
+            </div>
+            <div class="col-12 mt-4">
+                <button pButton type="submit" [disabled]="registerForm.invalid" label="Registrarse"
+                    class="bg-primary p-button-rounded text-white"></button>
+            </div>
+            <div class="col-12 mt-2">
+                <div class="text-center mb-2">
+                    ¿Ya tienes cuenta?
+                </div>
+                <a pButton type="button" label="INICIAR SESIÓN" (click)="goLogin()"
+                    class=" p-button-link p-button-sm text-primary"></a>
+            </div>
+        </div>
+    </form>
+</p-card>

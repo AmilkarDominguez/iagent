@@ -1,0 +1,71 @@
+// .btn-default {
+//     color: white;
+//     background-color: blue;
+// }
+
+// .btn-change {
+//     color: Red;
+//     background-color: white;
+// }
+
+::ng-deep .card-selected {
+    color: var(--primary-color-text);
+    box-shadow: 0px 0px 8px var(--primary-color) !important;
+}
+::ng-deep .feature-selected {
+    border: solid 3px white;
+    color: white;
+    box-shadow: 0px 0px 8px var(--primary-color) !important;
+    background: var(--primary-color) !important;
+    img {
+        filter: grayscale(100%) brightness(200%) saturate(0%) contrast(1000%);
+    }
+}
+
+::ng-deep .p-progressbar .p-progressbar-value {
+    border: 0 none;
+    margin: 0;
+    background: var(--primary-color);
+}
+
+::ng-deep .p-scrollpanel {
+    .p-scrollpanel-bar {
+        background-color: var(--surface-300);
+        opacity: 0.2;
+        transition: background-color 0.2s;
+    }
+}
+::ng-deep body {
+    // overflow-y: hidden; /* Hide vertical scrollbar */
+    // overflow-x: hidden; /* Hide horizontal scrollbar */
+    // -webkit-scrollbar: none;
+}
+
+::ng-deep .p-button {
+    color: #ffffff;
+    background: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    border-radius: 6px;
+}
+::ng-deep .p-button:enabled:hover {
+    background: var(--primary-color) !important;
+    color: #ffffff;
+    border-color: var(--primary-color) !important;
+}
+::ng-deep .p-button:enabled:active {
+    background: var(--primary-color) !important;
+    color: #ffffff;
+    border-color: var(--primary-color) !important;
+}
+
+// ::ng-deep .p-fileupload-buttonbar {
+//     background: var(--primary-color) !important;
+//     color: #ffffff;
+//     border-color: var(--primary-color) !important;
+//     .p-ripple .p-element .p-button .p-component .p-fileupload-choose {
+//         border-color: var(--primary-color) !important;
+//     }
+// }
